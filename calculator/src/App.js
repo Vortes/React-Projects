@@ -1,8 +1,26 @@
+import { useState } from "react";
+import Display from "./Display.js";
+import Form from "./Form.js";
 
 function App() {
+
+  const [num, setNum] = new useState()
+  const saveInputHandler = (enteredData) => {
+    setNum(prevNum => {if(prevNum !== undefined && prevNum !== "0") {
+      return prevNum += enteredData
+    } else {
+      return enteredData
+    }
+  })
+    if(enteredData === "AC") {
+      setNum(0)
+    }
+  }
+
   return (
     <div>
-      <h1 className="text-3xl underline">Hello world</h1>
+      <Display inputNum={num}/>
+      <Form onSaveInputData={saveInputHandler}/>
     </div>
   );
 }
